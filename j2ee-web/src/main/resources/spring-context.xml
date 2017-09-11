@@ -9,5 +9,7 @@
     <context:component-scan base-package="com.liuming.mej2ee.web"/>
 
     <!--实体类-->
-    <bean id="product" class="com.liuming.mej2ee.web.springbatch.entity.Product" scope="prototype"/>
+    <!--<bean id="product" class="com.liuming.mej2ee.web.springbatch.entity.Product" scope="prototype"/>-->
+    <bean id="product" class="com.liuming.mej2ee.data.model.Product" scope="prototype"/>
+
 </beans>

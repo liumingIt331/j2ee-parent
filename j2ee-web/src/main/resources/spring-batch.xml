@@ -37,7 +37,8 @@
     </bean>
 
     <!--csv文件输出到数据库-->
-    <bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter" scope="step" />
+    <!--<bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter" scope="step" />-->
+    <bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter1" scope="step" />
 
 
     <!--定义job-->
