@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+
+    <!--spring-bacth的基础组件-->
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository"/>
+    </bean>
+
+    <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <!--csv文件读取-->
+    <bean id="csvItemReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+        <!--<property name="resource" value="file:#{jobParameters['inputFile']}"/>-->
+        <property name="resource" value="classpath:#{jobParameters['inputFile']}"/>
+        <property name="linesToSkip" value="1" />
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property name="lineTokenizer" ref="lineTokenizer"/>
+                <property name="fieldSetMapper">
+                    <bean class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+                        <property name="prototypeBeanName" value="product"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="lineTokenizer" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+        <property name="delimiter" value=","/>
+        <property name="names" value="id,name,description,quantity"/>
+    </bean>
+
+    <!--csv文件输出到数据库-->
+    <bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter" scope="step" />
+
+
+    <!--定义job-->
+    <batch:job id="simpleFileImportJob">
+        <batch:step id="importFileStep">
+            <batch:tasklet>
+                <batch:chunk reader="csvItemReader" writer="productWriter" commit-interval="5" />
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+</beans>
