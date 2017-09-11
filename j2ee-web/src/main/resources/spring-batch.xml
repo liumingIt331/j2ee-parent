@@ -40,12 +40,26 @@
     <!--<bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter" scope="step" />-->
     <bean id="productWriter" class="com.liuming.mej2ee.web.springbatch.writer.ProductItemWriter1" scope="step" />
 
+    <!--product的两个处理类-->
+    <bean id="productProcessor" class="com.liuming.mej2ee.web.springbatch.processor.ProductProcessor" />
+    <bean id="productProcessor1" class="com.liuming.mej2ee.web.springbatch.processor.ProductProcessor1" />
+
+    <!--配置多个processor-->
+    <bean id="productCompositeProcessor" class="org.springframework.batch.item.support.CompositeItemProcessor">
+        <property name="delegates">
+            <list>
+                <ref bean="productProcessor1" />
+                <ref bean="productProcessor" />
+            </list>
+        </property>
+    </bean>
+
 
     <!--定义job-->
     <batch:job id="simpleFileImportJob">
         <batch:step id="importFileStep">
             <batch:tasklet>
-                <batch:chunk reader="csvItemReader" writer="productWriter" commit-interval="5" />
+                <batch:chunk reader="csvItemReader" processor="productCompositeProcessor" writer="productWriter" commit-interval="5" />
             </batch:tasklet>
         </batch:step>
     </batch:job>
