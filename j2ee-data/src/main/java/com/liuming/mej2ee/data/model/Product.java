@@ -25,6 +25,6 @@ public class Product {
     /** 描述 */
     private String description;
 
-    /** 重量 */
+    /** 数量 */
     private int quantity;
 }
