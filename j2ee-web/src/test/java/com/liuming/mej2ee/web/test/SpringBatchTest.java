@@ -1,5 +1,9 @@
 package com.liuming.mej2ee.web.test;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.liuming.mej2ee.data.model.Product;
 import com.liuming.mej2ee.web.base.BaseSpringTest;
 import org.junit.Test;
 import org.springframework.batch.core.*;
@@ -9,6 +13,7 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -50,5 +55,21 @@ public class SpringBatchTest extends BaseSpringTest {
         } catch (JobParametersInvalidException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("id", 1001);
+        map.put("name", null);
+        map.put("description", "123");
+        map.put("quantity", 2);
+        map.put("test", null);
+
+        String json = JSON.toJSONString(map);
+        System.out.println(json);
+//        Product product = JSON.parseObject(json, Product.class);
+        Product product = JSON.parseObject(json, Product.class, Feature.InitStringFieldAsEmpty);
+        System.out.println(JSON.toJSONString(product));
     }
 }

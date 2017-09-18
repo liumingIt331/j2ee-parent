@@ -1,7 +1,7 @@
 package com.liuming.mej2ee.data.model;
 
 
-import lombok.Data;
+import java.math.BigDecimal;
 
 /**
  * 商品实体类
@@ -13,7 +13,6 @@ import lombok.Data;
  * Description:
  */
 
-@Data
 public class Product {
 
     /** id */
@@ -27,4 +26,46 @@ public class Product {
 
     /** 数量 */
     private int quantity;
+
+    private BigDecimal test;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getTest() {
+        return test;
+    }
+
+    public void setTest(BigDecimal test) {
+        this.test = test;
+    }
 }
