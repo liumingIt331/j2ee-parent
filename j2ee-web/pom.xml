@@ -10,12 +10,13 @@
     <packaging>war</packaging>
     <name>j2ee-web</name>
     <url>http://maven.apache.org</url>
+
     <dependencies>
 
         <dependency>
             <groupId>com.liuming.mej2ee</groupId>
             <artifactId>j2ee-data</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!--junit测试-->
@@ -66,17 +67,14 @@
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-core</artifactId>
-            <version>${spring.batch.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-infrastructure</artifactId>
-            <version>${spring.batch.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-test</artifactId>
-            <version>${spring.batch.version}</version>
         </dependency>
 
         <!--mysql-->
@@ -129,20 +127,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <httpConnector>
-                        <port>9900</port>
-                    </httpConnector>
-                    <scanIntervalSeconds>1000</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/j2ee-web</contextPath>
-                    </webApp>
-                </configuration>
             </plugin>
         </plugins>
 
