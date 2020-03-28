@@ -18,7 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.2.8.RELEASE</spring.version>
-        <spring.batch.version>2.2.7.RELEASE</spring.batch.version>
+        <spring.batch.version>4.2.1.RELEASE</spring.batch.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-jetty-plugin.version>9.2.10.v20150310</maven-jetty-plugin.version>
         <junit.version>4.11</junit.version>
