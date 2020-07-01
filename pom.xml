@@ -23,7 +23,7 @@
         <maven-jetty-plugin.version>9.2.10.v20150310</maven-jetty-plugin.version>
         <junit.version>4.11</junit.version>
         <dbcp.version>1.4</dbcp.version>
-        <mysql.connector.version>5.1.37</mysql.connector.version>
+        <mysql.connector.version>8.0.16</mysql.connector.version>
         <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resource.version>2.4.3</project.build.resource.version>
