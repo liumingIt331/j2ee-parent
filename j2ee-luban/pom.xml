@@ -1,0 +1,15 @@
+<project>
+    <parent>
+        <artifactId>j2ee-parent</artifactId>
+        <groupId>com.liuming.mej2ee</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>j2ee-luban</artifactId>
+    <packaging>jar</packaging>
+    <name>j2ee-luban</name>
+
+    <dependencies>
+
+    </dependencies>
+</project>

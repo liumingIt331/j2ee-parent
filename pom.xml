@@ -10,6 +10,7 @@
         <module>j2ee-common</module>
         <module>j2ee-web</module>
         <module>j2ee-data</module>
+        <module>j2ee-luban</module>
     </modules>
 
     <name>j2ee</name>
