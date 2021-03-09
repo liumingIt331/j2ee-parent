@@ -1,4 +1,4 @@
-package com.liuming.mej2ee.luban.nio;
+package com.liuming.mej2ee.luban.nio.buffer;
 
 import java.io.*;
 import java.nio.ByteBuffer;
