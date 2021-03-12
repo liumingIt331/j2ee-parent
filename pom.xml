@@ -29,9 +29,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.resource.version>2.4.3</project.build.resource.version>
         <slf4j.api.version>1.7.2</slf4j.api.version>
+        <logback.version>1.2.3</logback.version>
         <lombok.version>1.16.18</lombok.version>
         <mybatis.version>3.2.6</mybatis.version>
         <mybatis-spring.version>1.2.2</mybatis-spring.version>
+        <netty.version>4.1.37.Final</netty.version>
     </properties>
 
     <dependencyManagement>
@@ -133,6 +135,11 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.api.version}</version>
             </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
 
             <!--mybatis-->
             <dependency>
@@ -150,6 +157,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.20</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
 
         </dependencies>
