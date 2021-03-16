@@ -16,7 +16,7 @@ public class TestServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workGroup)
                     .channel(NioServerSocketChannel.class) // 服务端用的通道类型 这里是NIO
-//                    .handler()  // 配置服务端的额Pipeline
+//                    .handler()  // 配置服务端的Pipeline
                     .childHandler(new TestServerInitializer());
             ChannelFuture channelFuture = serverBootstrap.bind(8099).sync();
             channelFuture.channel().closeFuture().sync();

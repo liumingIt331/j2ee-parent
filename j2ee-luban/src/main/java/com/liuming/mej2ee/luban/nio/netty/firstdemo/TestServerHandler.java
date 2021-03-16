@@ -18,9 +18,10 @@ public class TestServerHandler extends SimpleChannelInboundHandler<HttpObject> {
             String uri = httpRequest.uri();
             System.out.println("客户端请求地址：" + uri);
             ByteBuf byteBuf = Unpooled.copiedBuffer("helloworld", CharsetUtil.UTF_8);
-            FullHttpResponse fullHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+            FullHttpResponse fullHttpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK, byteBuf);
             fullHttpResponse.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain");
             fullHttpResponse.headers().set(HttpHeaderNames.CONTENT_LENGTH, byteBuf.readableBytes());
+            channelHandlerContext.writeAndFlush(fullHttpResponse);
         }
     }
 }
