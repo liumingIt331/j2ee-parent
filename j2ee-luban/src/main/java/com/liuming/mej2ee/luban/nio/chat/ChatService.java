@@ -9,9 +9,9 @@ import java.util.Set;
 
 /**
  * selectionKey
- * 是一个抽象类，表示selectableChannel再selector中注册的表示，每个Channel向Selector中注册时，都会创建一个SelectionKey
+ * 是一个抽象类，表示selectableChannel在selector中注册的表示，每个Channel向Selector中注册时，都会创建一个SelectionKey
  * selectionKey将channel和Selector建立了关系，并维护了channel事件
- * 可以通过cancel方法取消键，取消的键不会立即从selector中移除，二十添加操canceledKeys中，在下一次select操作时移除它，所以在调用某个key时，需要使用isInvalid进行校验
+ * 可以通过cancel方法取消键，取消的键不会立即从selector中移除，而是添加在canceledKeys中，在下一次select操作时移除它，所以在调用某个key时，需要使用isInvalid进行校验
  */
 public class ChatService {
 
