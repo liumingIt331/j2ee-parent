@@ -1,11 +1,11 @@
 package com.liuming.mej2ee.common.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,42 +17,77 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class TestUtil {
+
+    public static final Map<Long, String> MAP = new LinkedHashMap<>();
+
+    static {
+        MAP.put(3L, "level3");
+        MAP.put(2L, "level2");
+        MAP.put(1L, "level1");
+        MAP.put(0L, "root");
+    }
+
     public static void main(String[] args) {
-//        System.out.println("Hello World!");
+//        String name = "";
+//        concatString1(2L, name);
+//        System.out.println(name);
+//        System.out.println(concatString(3L, ""));
 
-        Demo demo = new Demo();
-        String string = JSON.toJSONString(demo);
-        System.out.println(string);
+//        HashSet<Object> set = new HashSet<>();
+//        set.add("java");
+//        System.out.println(set.contains(null));
 
-        ConcurrentHashMap<String, String> map1 = new ConcurrentHashMap<>();
-        ConcurrentHashMap<String, String> map2 = new ConcurrentHashMap<>();
+        Callable<Boolean> callable = new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                Thread.sleep(3000);
+                System.out.println("线程执行完成");
+                return true;
+            }
+        };
 
-        map1.put("3", "3");
-        map1.put("4", "4");
+        test09(callable);
+    }
 
-        map2.put("4", "4");
+    public static void test09(Callable<Boolean> callable) {
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        // 采用Future
+        Future<Boolean> future = executorService.submit(callable);
 
-        System.out.println(JSON.toJSON(map1));
-        System.out.println(JSON.toJSON(map2));
+        try {
+            if (future.get(4, TimeUnit.SECONDS)) {
+                System.out.println("任务执行成功");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            System.out.println("执行超时");
+            future.cancel(true);
+        }
 
+        System.out.println("测试下进度");
 
-        System.out.println("流： " + new ByteArrayOutputStream());
+    }
 
+    public static String concatString(Long id, String name) {
+        name = StringUtils.isBlank(name) ? MAP.get(id) : MAP.get(id) + "." + name;
 
-        JSONObject request = new JSONObject();
-        request.put("amount", 108022782.665882);
-        System.out.println("amount:" + request.getLong("amount"));
+        Long pId = id - 1;
+        if (pId != 0) {
+            name = concatString(id - 1, name);
+        }
 
-        System.out.println(Double.doubleToLongBits(55.673));
-        System.out.println(Double.doubleToLongBits(55.677));
-        System.out.println(Double.compare(55.673, 55.677));
+        return name;
+    }
+
+    public static void concatString1(Long id, String name) {
+        name = StringUtils.isBlank(name) ? MAP.get(id) : MAP.get(id) + "." + name;
+
+        Long pId = id - 1;
+        if (pId != 0) {
+            concatString1(id - 1, name);
+        }
     }
 }
 
 
-class Demo {
-
-    public String getApiName() {
-        return "testApi";
-    }
-}

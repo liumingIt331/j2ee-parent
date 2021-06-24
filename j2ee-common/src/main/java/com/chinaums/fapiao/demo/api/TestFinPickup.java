@@ -17,7 +17,7 @@ public class TestFinPickup {
 
         req.put("msgType", "finance.pickup");
         req.put("msgId", UUIDGenerator.getUUID());
-        req.put("msgSrc", "FINANCE_HAINAN");
+        req.put("msgSrc", Constant.MSG_SRC);
         req.put("requestTimestamp", String.format("%1$tF %1$tT",Calendar.getInstance().getTimeInMillis()));
         req.put("srcReserve", "财政票据版式文件下载");
 
@@ -28,8 +28,7 @@ public class TestFinPickup {
         req.put("reversing", false);
         req.put("needImg", false);
 
-        String key = "3bba5ba89a0b4041bc77e0b2dfb8b042";
-        String sign = SignUtil.signWithSha(req, key, "utf-8");
+        String sign = SignUtil.signWithSha(req, Constant.MSG_SRC_KEY, "utf-8");
         req.put("sign", sign);
 
         return req.toString();

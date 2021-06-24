@@ -21,8 +21,8 @@ public class TestInventoryQuery {
         req.put("requestTimestamp", String.format("%1$tF %1$tT",Calendar.getInstance().getTimeInMillis()));
         req.put("srcReserve", "发票库存查询");
 
-        req.put("merchantId", "123451234512345");
-        req.put("terminalId", "12345678");
+        req.put("merchantId", "898009990000010");
+        req.put("terminalId", "00000001");
 
         String key = "c8a9236183cb47ab82bb2fab2df0a13a";
         String sign = SignUtil.signWithSha(req, key, "utf-8");

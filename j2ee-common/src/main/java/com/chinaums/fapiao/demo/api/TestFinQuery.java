@@ -19,17 +19,16 @@ public class TestFinQuery {
 
         req.put("msgType", "finance.query");
         req.put("msgId", UUIDGenerator.getUUID());
-        req.put("msgSrc", "FINANCE_HAINAN");
+        req.put("msgSrc", Constant.MSG_SRC);
         req.put("requestTimestamp", String.format("%1$tF %1$tT",Calendar.getInstance().getTimeInMillis()));
         req.put("srcReserve", "财政票据状态查询");
 
-        req.put("merchantId", "898004010900041");
-        req.put("terminalId", "10900041");
-        req.put("bizNo", "c5010a8e970241cb8758c9d32c481544");
-        req.put("bizDate", "20210316");
+        req.put("merchantId", "898000099000001");
+        req.put("terminalId", "00000009");
+        req.put("bizNo", "e24eadedfbda49eeb909b48059ced18b");
+        req.put("bizDate", "20210517");
 
-        String key = "3bba5ba89a0b4041bc77e0b2dfb8b042";
-        String sign = SignUtil.signWithSha(req, key, "utf-8");
+        String sign = SignUtil.signWithSha(req, Constant.MSG_SRC_KEY, "utf-8");
         req.put("sign", sign);
 
         return req.toString();

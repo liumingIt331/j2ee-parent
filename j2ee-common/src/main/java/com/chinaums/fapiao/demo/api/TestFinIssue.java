@@ -20,7 +20,7 @@ public class TestFinIssue {
 
         req.put("msgType", "finance.issue");
         req.put("msgId", UUIDGenerator.getUUID());
-        req.put("msgSrc", "FINANCE_HAINAN");
+        req.put("msgSrc", Constant.MSG_SRC);
         req.put("requestTimestamp", String.format("%1$tF %1$tT", Calendar.getInstance().getTimeInMillis()));
         req.put("srcReserve", "财政票据开具");
 
@@ -30,8 +30,8 @@ public class TestFinIssue {
         req.put("bizTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         req.put("invoiceTypeCode", "0401");
 
-        req.put("merchantId", "898004010900041");
-        req.put("terminalId", "10900041");
+        req.put("merchantId", "898000099000001");
+        req.put("terminalId", "00000009");
 
         req.put("payerName", "莫安锐1");
         req.put("payerCode", "460023197605010837");
@@ -40,6 +40,8 @@ public class TestFinIssue {
         req.put("payerAccount", "622111233333333313");
         req.put("payerGender", "男");
         req.put("payerAge", "46");
+        req.put("cardType", "SOCIAL_SECURITY_CARD");
+        req.put("cardNo", "999999999999999");
 
         req.put("patientNo", "000610511200");
         req.put("patientDate", "20201127");
@@ -48,19 +50,19 @@ public class TestFinIssue {
         req.put("inHospitalDate", "20201127");
         req.put("outHospitalDate", "20210201");
         req.put("medicalOrgType", "");
-        req.put("medicalInsuranceTyp", "");
-        req.put("medicalInsuranceNo", "");
+        req.put("medicalInsuranceTyp", "新型农村合作医疗");
+        req.put("medicalInsuranceNo", "008");
 
         req.put("foundPayAmount", "");
         req.put("otherPayAmount", "");
         req.put("accountPayAmount", "");
-        req.put("ownPayAmount", "34");
+        req.put("ownPayAmount", "17");
         req.put("selfPaymentAmount", "");
         req.put("selfCostAmount", "");
         req.put("prepayAmount", "");
-        req.put("rechargeAmount", "34");
+        req.put("rechargeAmount", "17");
         req.put("refundAmount", "0");
-        req.put("totalAmount", "34");
+        req.put("totalAmount", "17");
 
         req.put("remark", "备注");
         req.put("payee", "管理员");
@@ -72,9 +74,11 @@ public class TestFinIssue {
 
         JSONArray chargeItemDetail = new JSONArray();
         JSONObject chargeItem1 = new JSONObject();
-        chargeItemDetail.add(chargeItem1);
-        chargeItem1.put("name", "诊察费");
-        chargeItem1.put("code", "YL11");
+//        chargeItemDetail.add(chargeItem1);
+//        chargeItem1.put("name", "诊察费");
+//        chargeItem1.put("code", "YL11");
+        chargeItem1.put("name", "诊查费");
+        chargeItem1.put("code", "99920004");
         chargeItem1.put("std", "17");
         chargeItem1.put("amount", "17");
         chargeItem1.put("unit", "");
@@ -84,8 +88,10 @@ public class TestFinIssue {
 
         JSONObject chargeItem2 = new JSONObject();
         chargeItemDetail.add(chargeItem2);
-        chargeItem2.put("name", "护理费");
-        chargeItem2.put("code", "YL13");
+//        chargeItem2.put("name", "护理费");
+//        chargeItem2.put("code", "YL13");
+        chargeItem2.put("name", "治疗费");
+        chargeItem2.put("code", "99920005");
         chargeItem2.put("std", "17");
         chargeItem2.put("amount", "17");
         chargeItem2.put("unit", "");
@@ -95,11 +101,16 @@ public class TestFinIssue {
 
         JSONArray listItemDetail = new JSONArray();
         JSONObject listItem1 = new JSONObject();
-        listItemDetail.add(listItem1);
-        listItem1.put("itemTypeCode", "046");
+//        listItemDetail.add(listItem1);
+//        listItem1.put("itemTypeCode", "046");
+//        listItem1.put("itemTypeName", "诊查费");
+//        listItem1.put("name", "诊察费");
+//        listItem1.put("code", "YL11");
+        listItem1.put("itemTypeCode", "99920004");
         listItem1.put("itemTypeName", "诊查费");
-        listItem1.put("name", "诊察费");
-        listItem1.put("code", "YL11");
+        listItem1.put("name", "诊查费");
+        listItem1.put("code", "99920004");
+
         listItem1.put("std", "17");
         listItem1.put("amount", "17");
         listItem1.put("unit", "");
@@ -109,10 +120,15 @@ public class TestFinIssue {
 
         JSONObject listItem2 = new JSONObject();
         listItemDetail.add(listItem2);
-        listItem2.put("itemTypeCode", "028");
-        listItem2.put("itemTypeName", "护理费");
-        listItem2.put("name", "护理费");
-        listItem2.put("code", "YL13");
+//        listItem2.put("itemTypeCode", "028");
+//        listItem2.put("itemTypeName", "护理费");
+//        listItem2.put("name", "护理费");
+//        listItem2.put("code", "YL13");
+        listItem2.put("itemTypeCode", "99920005");
+        listItem2.put("itemTypeName", "治疗费");
+        listItem2.put("name", "治疗费");
+        listItem2.put("code", "99920005");
+
         listItem2.put("std", "17");
         listItem2.put("amount", "17");
         listItem2.put("unit", "");
@@ -120,11 +136,17 @@ public class TestFinIssue {
         listItem2.put("selfAmount", "");
         listItem2.put("remark", "");
 
+        JSONArray payChannelDetailList = new JSONArray();
+        JSONObject payChannelDetail = new JSONObject();
+        payChannelDetail.put("payChannelCode", "POS");
+        payChannelDetail.put("payChannelValue", 17.00);
+        payChannelDetailList.add(payChannelDetail);
+
         req.put("chargeItemDetail", chargeItemDetail.toString());
         req.put("listItemDetail", listItemDetail.toString());
+        req.put("payChannelDetail", payChannelDetailList.toString());
 
-        String key = "3bba5ba89a0b4041bc77e0b2dfb8b042";
-        String sign = SignUtil.signWithSha(req, key, "utf-8");
+        String sign = SignUtil.signWithSha(req, Constant.MSG_SRC_KEY, "utf-8");
         req.put("sign", sign);
 
         return req.toString();

@@ -1,4 +1,4 @@
-package com.liuming.mej2ee.common.utils;
+package com.liuming.mej2ee.common.office;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Font;
@@ -17,6 +17,7 @@ import org.apache.poi.xwpf.converter.core.FileImageExtractor;
 import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
 import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Entities;
@@ -31,6 +32,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.List;
 
 /**
  * 使用poi+itextpdf进行word转pdf
@@ -119,6 +121,7 @@ public class DocToPdfByPoiTest {
             // 1> 加载文档到XWPFDocument
             in = new FileInputStream(new File(docxPath));
             XWPFDocument document = new XWPFDocument(in);
+            List<XWPFParagraph> paragraphs = document.getParagraphs();
             // 2> 解析XHTML配置（这里设置IURIResolver来设置图片存放的目录）
             XHTMLOptions options = XHTMLOptions.create();
             // 存放word中图片的目录

@@ -10,24 +10,21 @@ import java.util.Calendar;
 /**
  * 发票状态查询
  */
-public class TestFinNotify {
+public class TestFinInventoryQuery {
 
     public static String getRequestJson() {
         JSONObject req = new JSONObject();
 
-        req.put("msgType", "finance.notify");
+        req.put("msgType", "finance.inventory.query");
         req.put("msgId", UUIDGenerator.getUUID());
         req.put("msgSrc", Constant.MSG_SRC);
         req.put("requestTimestamp", String.format("%1$tF %1$tT",Calendar.getInstance().getTimeInMillis()));
-        req.put("srcReserve", "财政票据推送");
+        req.put("srcReserve", "财政票据库存查询");
 
         req.put("merchantId", "898000099000001");
         req.put("terminalId", "00000009");
-        req.put("bizNo", "dacd1109df7e45df864dd8faba35afa7");
-        req.put("bizDate", "20210511");
-        req.put("reversing", false);
-        req.put("notifyMobileNo", "");
-        req.put("notifyEMail", "liuming_it@sina.com");
+        req.put("beginDate", "20210301");
+        req.put("endDate", "20210331");
 
         String sign = SignUtil.signWithSha(req, Constant.MSG_SRC_KEY, "utf-8");
         req.put("sign", sign);
